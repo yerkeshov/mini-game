@@ -114,13 +114,21 @@ document.getElementById('btnEqual').addEventListener('click', function () {
 
 // Описание формирования текстового представления числа на русском языке
 function answerNumberText(answerNumber){
+    
     let sotni = ["", "сто", "двести", "триста", "четыреста", "пятсот", "шестсот", "семсот", "восемсот", "девятсот"];
     let desatki = ["", "надцать", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"];
     let edinici = ["", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"];
     
+    let sign = 0;
+    let n = "";
+    if (answerNumber < 0){
+        sign = 1;
+        n += answerNumber * -1;
+    }
+    else
+        n += answerNumber;
 
     let s = d = e = "";
-    let n = answerNumber + "";
 
     if(n >= 100) s = sotni[n[n.length-3]] + " ";
     else s = "";
@@ -130,8 +138,8 @@ function answerNumberText(answerNumber){
                 
     e = edinici[n[n.length-1]];
 
-    if (n >= 11 && n <= 19) 
-        return s + e + d;
+    if (n >= 11 && n <= 19)
+        return sign === 0 ? (s + e + d) : ("минус " + s + e + d);
     else 
-        return s + d + e;
+        return sign === 0 ? (s + d + e) : ("минус " + s + d + e);
 }
